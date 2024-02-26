@@ -25,6 +25,6 @@ import TheWelcome from '../components/TheWelcome.vue'
         </thead>
         <tbody class="data-show"></tbody>
       </table>
-      <button class="sava-local w-[100px] h-[50px]  bg-teal-500 text-white rounded-md" type="button">儲存進Local</button>
+      <button class="sava-local w-[100px] h-[50px]  bg-teal-400 text-white rounded-md" type="button">儲存進Local</button>
     </div>
 </template>
