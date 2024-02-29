@@ -17,7 +17,7 @@ export default {
 
     pushText() {
       let myId = 0;
-      if (this.todoText.length !== 0) {
+      if (this.todoText.length !== 0 && this.todoText.trim() !== "") {
         myId = this.todoText[this.todoText.length - 1].id;
       }
       if (this.Text !== "") {
@@ -63,19 +63,19 @@ export default {
       <div class="nav w-full h-[60px]  bg-teal-500"></div>
       <div class="add w-full h-[80px] flex justify-center items-center gap-2" >
         <input type="text" id="" class="add-text w-2/4 h-3/4 " @change="getText"/>
-        <button class="add-Todo w-[100px] h-[50px] bg-teal-500 border-4" type="button" @click="pushText()">新增</button>
+        <button class="add-Todo add-btn" type="button" @click="pushText()">新增</button>
       </div>
       <div>
         <div class="search-btn gap-5 w-full h-[80px] flex items-center border-b-4">
-          <div class="all w-[100px] h-[60px] border-2 flex items-center justify-center text-white  bg-teal-500 rounded-lg" type="button" data-search="all" @click="check = null" :class="{'active':check == null}">全部</div>
-          <div class="is-todo w-[100px] h-[60px] border-2 flex items-center justify-center text-white  bg-teal-500 rounded-lg" type="button" data-search="isTodo" @click="check = true" :class="{'active':check == true}">已執行</div>
-          <div class="not-todo w-[100px] h-[60px] border-2 flex items-center justify-center text-white  bg-teal-500 rounded-lg" type="button" data-search="notTodo"  @click="check= false" :class="{'active':check == false}">未執行</div>
+          <div class="all state-text" type="button" data-search="all" @click="check = null" :class="{'active':check == null}">全部</div>
+          <div class="is-todo state-text" type="button" data-search="isTodo" @click="check = true" :class="{'active':check == true}">已執行</div>
+          <div class="not-todo state-text" type="button" data-search="notTodo"  @click="check= false" :class="{'active':check == false}">未執行</div>
         </div>
       </div>
       <div class="title-div w-full h-[60px] bg-teal-500 flex justify-between items-center">
-          <div class="div w-[400px] flex justify-center items-center">狀態</div>
-          <div class="div w-[400px] flex justify-center items-center">訊息</div>
-          <div class="div w-[400px] flex justify-center items-center">功能</div>
+          <div class="div title-text">狀態</div>
+          <div class="div title-text">訊息</div>
+          <div class="div title-text">功能</div>
         </div>
       <table class="todo w-full h-[60px]">
         <thead class="w-full h-full flex flex-col">
@@ -84,11 +84,11 @@ export default {
               <input type="checkbox" v-model="item.edit">
             </th>
             <th class="lg:w-[200px] xl:w-[400px] h-full flex justify-center items-center">
-              <td>{{ item.msg }}</td>
+              <td class="text-white">{{ item.msg }}</td>
             </th>
-            <th class="lg:w-[200px] xl:w-[400px] h-full flex justify-center items-center">
-              <button @click="editText(item.id)">編輯</button>
-              <button @click="deleteText(index)">刪除</button>
+            <th class="lg:w-[200px] xl:w-[400px] h-full flex justify-center items-center gap-5">
+              <button @click="editText(item.id)" class="text-white">編輯</button>
+              <button @click="deleteText(index)" class="text-white">刪除</button>
             </th>
           </tr>
         </thead>
@@ -101,5 +101,16 @@ export default {
 <style scoped>
 .active {
   @apply bg-white text-black;
+}
+
+.state-text{
+  @apply w-[100px] h-[60px] border-2 flex items-center justify-center text-white  bg-teal-500 rounded-lg text-xl font-serif font-black;
+}
+.title-text{
+  @apply w-[400px] flex justify-center items-center text-xl font-serif font-black  text-white
+}
+
+.add-btn{
+  @apply w-[100px] h-[50px] bg-teal-500 border-4 text-white text-xl font-serif font-black
 }
 </style>
