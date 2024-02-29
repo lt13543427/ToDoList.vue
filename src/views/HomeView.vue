@@ -17,7 +17,7 @@ export default {
 
     pushText() {
       let myId = 0;
-      if (this.todoText.length !== 0 && this.todoText.trim() !== "") {
+      if (this.todoText.length !== 0 || this.todoText.trim() !== "") {
         myId = this.todoText[this.todoText.length - 1].id;
       }
       if (this.Text !== "") {
