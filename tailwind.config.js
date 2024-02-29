@@ -8,8 +8,5 @@ export default {
     extend: {},
   },
   plugins: [],
-  server:{
-    open: true,
-  }
 }
 

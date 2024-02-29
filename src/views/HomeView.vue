@@ -6,9 +6,20 @@ export default {
       Text: '',
       todoText: [],
       check : null,
+      editSwitch: false,
+      editMsg:'',
     };
   },
-
+  // 預先加載資料
+  mounted() {
+    if(localStorage.getItem('msg')){
+      this.todoText = JSON.parse(localStorage.getItem('msg'))
+    }
+  },
+  // 預處理拿到的資料,他有暫存功能,可拿整包資料,利用判段式對資料進行篩選
+  computed:{
+    
+  },
   methods: {
     pushText() {
       let myId = 0;
@@ -20,6 +31,8 @@ export default {
           id: myId + 1,
           edit: false,
           msg: this.Text,
+          editSwitch: false,
+          editMsg:'',
         }
           this.todoText.push(newText);
           console.log(this.todoText);
@@ -32,17 +45,33 @@ export default {
     deleteText(index){
       this.todoText.splice(index,1);
     },
-
-    editText(id) {
-      this.todoText.map((item) => {
-        if (item.id === id) {
-          const content = prompt('請修改文字');
-            if (content !== null && content !== "") {
-            item.msg = content;
-            }
-        }
-      });
+    
+    savelocal(){
+      localStorage.setItem('msg',JSON.stringify(this.todoText));
     },
+
+    // 彈跳視窗
+    // editText(id) {
+    //   this.todoText.map((item) => {
+    //     if (item.id === id) {
+    //       const content = prompt('請修改文字',item.msg);
+    //         if (content !== null && content !== "") {
+    //         item.msg = content;
+    //         }
+    //     }
+    //   });
+    // },
+    
+    // 輸入框模式
+    editmsg(item) {
+      item.editSwitch = !item.editSwitch;
+      if(item.editMsg !==''){
+        item.msg = item.editMsg;
+      }else{
+        item.editMsg = item.msg
+      }
+    },
+    
     filterText(){
       if(this.check === null){
         return this.todoText
@@ -60,7 +89,7 @@ export default {
     <div class="todolist-body w-full h-screen bg-gray-200">
       <div class="nav w-full h-[60px]  bg-teal-500"></div>
       <div class="add w-full h-[80px] flex justify-center items-center gap-2" >
-        <input v-model="Text" type="text" id="" class="add-text w-2/4 h-3/4 "/>
+        <input v-model="Text" type="text" placeholder ="請輸入你的代辦事項" class="add-text w-2/4 h-3/4 "/>
         <button class="add-Todo add-btn" type="button" @click="pushText()">新增</button>
       </div>
       <div>
@@ -82,17 +111,18 @@ export default {
               <input type="checkbox" v-model="item.edit">
             </th>
             <th class="lg:w-[200px] xl:w-[400px] h-full flex justify-center items-center">
-              <td class="text-white">{{ item.msg }}</td>
+              <td v-if="item.editSwitch === false" class="text-white">{{ item.msg }}</td>
+              <input v-else v-model="item.editMsg" type="text">
             </th>
             <th class="lg:w-[200px] xl:w-[400px] h-full flex justify-center items-center gap-5">
-              <button @click="editText(item.id)" class="text-white">編輯</button>
+              <button @click="editmsg(item)" class="text-white">編輯</button>
               <button @click="deleteText(index)" class="text-white">刪除</button>
             </th>
           </tr>
         </thead>
         <tbody class="data-show"></tbody>
       </table>
-      <button class="sava-local w-[100px] h-[50px]  bg-teal-400 text-white rounded-md" type="button">儲存進Local</button>
+      <button class="sava-local w-[100px] h-[50px]  bg-teal-400 text-white rounded-md" type="button" @click="savelocal()">儲存進Local</button>
     </div>
 </template>
 
