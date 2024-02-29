@@ -10,25 +10,23 @@ export default {
   },
 
   methods: {
-    getText(e) {
-      this.Text = e.target.value;
-      console.log(this.Text);
-    },
-
     pushText() {
       let myId = 0;
-      if (this.todoText.length !== 0 || this.todoText.trim() !== "") {
+      if (this.todoText.length !== 0) {
         myId = this.todoText[this.todoText.length - 1].id;
       }
-      if (this.Text !== "") {
+      if (this.Text.trim() !== "") {
         const newText = {
           id: myId + 1,
           edit: false,
           msg: this.Text,
-        };
+        }
           this.todoText.push(newText);
           console.log(this.todoText);
+      }else {
+        alert('是不會打字逆');
       }
+      this.Text = '';
     },
 
     deleteText(index){
@@ -62,7 +60,7 @@ export default {
     <div class="todolist-body w-full h-screen bg-gray-200">
       <div class="nav w-full h-[60px]  bg-teal-500"></div>
       <div class="add w-full h-[80px] flex justify-center items-center gap-2" >
-        <input type="text" id="" class="add-text w-2/4 h-3/4 " @change="getText"/>
+        <input v-model="Text" type="text" id="" class="add-text w-2/4 h-3/4 "/>
         <button class="add-Todo add-btn" type="button" @click="pushText()">新增</button>
       </div>
       <div>
