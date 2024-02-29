@@ -67,9 +67,9 @@ export default {
       </div>
       <div>
         <div class="search-btn gap-5 w-full h-[80px] flex items-center border-b-4">
-          <div class="all w-[100px] h-[60px] border-2 flex items-center justify-cente text-white  bg-teal-500 rounded-lg" type="button" data-search="all" @click="check = null" :class="active">全部</div>
-          <div class="is-todo w-[100px] h-[60px] border-2 flex items-center justify-center text-white  bg-teal-500 rounded-lg" type="button" data-search="isTodo" @click="check = true" :class="active">已執行</div>
-          <div class="not-todo w-[100px] h-[60px] border-2 flex items-center justify-cente text-white  bg-teal-500 rounded-lg" type="button" data-search="notTodo"  @click="check= false" :class="active">未執行</div>
+          <div class="all w-[100px] h-[60px] border-2 flex items-center justify-center text-white  bg-teal-500 rounded-lg" type="button" data-search="all" @click="check = null" :class="{'active':check == null}">全部</div>
+          <div class="is-todo w-[100px] h-[60px] border-2 flex items-center justify-center text-white  bg-teal-500 rounded-lg" type="button" data-search="isTodo" @click="check = true" :class="{'active':check == true}">已執行</div>
+          <div class="not-todo w-[100px] h-[60px] border-2 flex items-center justify-center text-white  bg-teal-500 rounded-lg" type="button" data-search="notTodo"  @click="check= false" :class="{'active':check == false}">未執行</div>
         </div>
       </div>
       <div class="title-div w-full h-[60px] bg-teal-500 flex justify-between items-center">
