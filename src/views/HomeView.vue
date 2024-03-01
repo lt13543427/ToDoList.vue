@@ -18,7 +18,13 @@ export default {
   },
   // 預處理拿到的資料,他有暫存功能,可拿整包資料,利用判段式對資料進行篩選
   computed:{
-    
+    filterText(){
+      if(this.check === null){
+        return this.todoText
+        }else{
+          return this.todoText.filter(item =>item.edit == this.check)
+        }
+    },
   },
   methods: {
     pushText() {
@@ -71,14 +77,6 @@ export default {
         item.editMsg = item.msg
       }
     },
-    
-    filterText(){
-      if(this.check === null){
-        return this.todoText
-        }else{
-          return this.todoText.filter(item =>item.edit == this.check)
-        }
-    },
   },
 };
 
@@ -106,7 +104,7 @@ export default {
         </div>
       <table class="todo w-full h-[60px]">
         <thead class="w-full h-full flex flex-col">
-          <tr class="w-full h-full flex  justify-between items-center bg-teal-500" v-for="(item , index) in filterText()" :key="item.id">
+          <tr class="w-full h-full flex  justify-between items-center bg-teal-500" v-for="(item , index) in filterText" :key="item.id">
             <th class="lg:w-[200px] xl:w-[400px] h-full flex justify-center items-center">
               <input type="checkbox" v-model="item.edit">
             </th>
